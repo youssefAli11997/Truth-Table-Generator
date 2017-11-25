@@ -5,7 +5,7 @@ public class ExpressionHandler {
 
     private String expression;
     private Boolean[][] truthTable;
-    private TruthTableGenerator truthTableGenerator;
+    private TruthTableHandler truthTableHandler;
     private Boolean tautology;
     private Boolean contradiction;
     private int numberOfVariables;
@@ -22,7 +22,7 @@ public class ExpressionHandler {
         numberOfVariables = initNumberOfVariables();
         cols = calcCols();
         rows = calcRows();
-        truthTableGenerator = new TruthTableGenerator(rows, cols, symbols);
+        truthTableHandler = new TruthTableHandler(rows, cols, symbols);
     }
 
     private Character[] initSymbols() {
@@ -69,7 +69,7 @@ public class ExpressionHandler {
     }
 
     public void initTruthTable() {
-        truthTable = truthTableGenerator.generateTruthTable(this.expression);
+        truthTable = truthTableHandler.generateTruthTable(this.expression);
     }
 
     public Boolean[][] getTruthTable() {
@@ -119,6 +119,6 @@ public class ExpressionHandler {
     }
 
     public Boolean isEquivalence(Boolean[][] comparedTruthTable){
-        return truthTableGenerator.testEquivalance(truthTable, comparedTruthTable);
+        return truthTableHandler.testEquivalance(truthTable, comparedTruthTable);
     }
 }

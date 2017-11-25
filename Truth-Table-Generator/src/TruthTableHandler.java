@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TruthTableGenerator {
+public class TruthTableHandler {
 
     private Boolean[][] truthTable;
     private int rows;
@@ -9,7 +9,7 @@ public class TruthTableGenerator {
     private Character[] symbols;
 
 
-    public TruthTableGenerator(int rows, int cols, Character[] symbols){
+    public TruthTableHandler(int rows, int cols, Character[] symbols){
         this.rows = rows;
         this.cols = cols;
         this.vars = cols-1;
