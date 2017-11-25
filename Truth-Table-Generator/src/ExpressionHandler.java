@@ -7,18 +7,22 @@ public class ExpressionHandler {
     private Boolean[][] truthTable;
     private TruthTableGenerator truthTableGenerator;
     private Boolean tautology;
-    private  Boolean contradiction;
+    private Boolean contradiction;
     private int numberOfVariables;
+    private int rows;
+    private int cols;
     private Character[] symbols;
 
-    public ExpressionHandler(String expression){
+    public ExpressionHandler(String expression) {
         this.expression = expression;
         symbols = initSymbols();
         truthTable = null;
         tautology = false;
         contradiction = false;
         numberOfVariables = initNumberOfVariables();
-        truthTableGenerator = new TruthTableGenerator(calcRows(), calcCols(), symbols);
+        cols = calcCols();
+        rows = calcRows();
+        truthTableGenerator = new TruthTableGenerator(rows, cols, symbols);
     }
 
     private Character[] initSymbols() {
@@ -28,7 +32,7 @@ public class ExpressionHandler {
 
     private int calcRows() {
         int pow2 = 1;
-        for(int i=0; i<numberOfVariables; i++)
+        for (int i = 0; i < numberOfVariables; i++)
             pow2 *= 2;
         return pow2;
     }
@@ -37,14 +41,13 @@ public class ExpressionHandler {
         return numberOfVariables + 1;
     }
 
-    private Map<Character, Integer> getFreqMap(){
+    private Map<Character, Integer> getFreqMap() {
         Map<Character, Integer> freq = new HashMap<>();
-        for(Character c : expression.toCharArray()){
-            if(Character.isAlphabetic(c) && !c.equals('v') && !c.equals('V')){
-                if(freq.containsKey(c)){
+        for (Character c : expression.toCharArray()) {
+            if (Character.isAlphabetic(c) && !c.equals('v') && !c.equals('V')) {
+                if (freq.containsKey(c)) {
                     freq.put(c, freq.get(c) + 1);
-                }
-                else{
+                } else {
                     freq.put(c, 1);
                 }
             }
@@ -52,26 +55,30 @@ public class ExpressionHandler {
         return freq;
     }
 
-    public int initNumberOfVariables() {
+    private int initNumberOfVariables() {
         Map<Character, Integer> freq = getFreqMap();
         return freq.size();
-    }
-
-    public void setExpression(String expression) {
-        this.expression = expression;
     }
 
     public String getExpression() {
         return expression;
     }
 
-    public Boolean[][] getTruthTable(){
-        if(truthTable != null)
-            return truthTable;
-        return truthTableGenerator.generateTruthTable(this.expression);
+    public void setExpression(String expression) {
+        this.expression = expression;
     }
 
-    public Character[] getSymbols(){
+    public void initTruthTable() {
+        truthTable = truthTableGenerator.generateTruthTable(this.expression);
+    }
+
+    public Boolean[][] getTruthTable() {
+        if (truthTable == null)
+            initTruthTable();
+        return truthTable;
+    }
+
+    public Character[] getSymbols() {
         return symbols;
     }
 
@@ -79,19 +86,39 @@ public class ExpressionHandler {
         return numberOfVariables;
     }
 
-    public void testTautology(){
-
+    private void testTautology() {
+        for (Boolean[] row : truthTable) {
+            if (row[cols - 1].equals(false)) {
+                tautology = false;
+                return;
+            }
+        }
+        tautology = true;
     }
 
-    public void testContradiction(){
-
+    private void testContradiction() {
+        for (Boolean[] row : truthTable) {
+            if (row[cols - 1].equals(true)) {
+                contradiction = false;
+                return;
+            }
+        }
+        contradiction = true;
     }
 
-    public Boolean isTautology(){
-        return this.tautology;
+    public Boolean isTautology() {
+        if (tautology == null)
+            testTautology();
+        return tautology;
     }
 
-    public Boolean isContradiction(){
-        return this.contradiction;
+    public Boolean isContradiction() {
+        if (contradiction == null)
+            testContradiction();
+        return contradiction;
+    }
+
+    public Boolean isEquivalence(Boolean[][] comparedTruthTable){
+        return truthTableGenerator.testEquivalance(truthTable, comparedTruthTable);
     }
 }
