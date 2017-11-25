@@ -2,16 +2,20 @@ import java.util.ArrayList;
 
 public class TruthTableGenerator {
 
-    ArrayList<String> expressions;
-    ArrayList<Boolean[][]> truthTables;
+    private Boolean[][] truthTable;
+    private int rows;
+    private int cols;
 
 
-    public TruthTableGenerator(){
-        expressions = new ArrayList<>();
-        truthTables = new ArrayList<>();
+    public TruthTableGenerator(int rows, int cols){
+        this.rows = rows;
+        this.cols = cols;
+        truthTable = new Boolean[this.rows][this.cols];
     }
 
     public Boolean[][] generateTruthTable(String expression){
+        
 
+        return null;
     }
 }
