@@ -18,21 +18,22 @@ public class TruthTableHandler {
     }
 
     public Boolean[][] generateTruthTable(String expression){
-        String substitutedExpression = "";
         // 0 --> (2^vars)-1
         for(int subset = 0; subset<rows; subset++){
             String subsetBits = Integer.toBinaryString(subset);
+            String substitutedExpression = expression;
             while(subsetBits.length() < vars){
                 subsetBits = "0" + subsetBits;
             }
-            System.out.println(subsetBits);
+            //System.out.println(subsetBits);
             for(int i=0; i<subsetBits.length(); i++){
                 truthTable[subset][i] = (subsetBits.charAt(i) == '1');
             }
             int i=0;
             for(Character symbol : symbols){
-                substitutedExpression = expression.replaceAll(symbol + "", subsetBits.charAt(i)+ "");
+                substitutedExpression = substitutedExpression.replaceAll(symbol + "", subsetBits.charAt(i++)+ "");
             }
+            System.out.println(substitutedExpression);
             // Labib's Job (commented til being done).
             // Boolean truthValue = SomeClass.getTruthValue(substitutedExpression);
             // truthTable[subset][cols-1] = truthValue;
