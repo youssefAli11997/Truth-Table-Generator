@@ -9,14 +9,21 @@ public class ExpressionHandler {
     private Boolean tautology;
     private  Boolean contradiction;
     private int numberOfVariables;
+    private Character[] symbols;
 
     public ExpressionHandler(String expression){
         this.expression = expression;
+        symbols = initSymbols();
         truthTable = null;
         tautology = false;
         contradiction = false;
-        numberOfVariables = getNumberOfVariables();
-        truthTableGenerator = new TruthTableGenerator(calcRows(), calcCols());
+        numberOfVariables = initNumberOfVariables();
+        truthTableGenerator = new TruthTableGenerator(calcRows(), calcCols(), symbols);
+    }
+
+    private Character[] initSymbols() {
+        Map<Character, Integer> freq = getFreqMap();
+        return freq.keySet().toArray(new Character[0]);
     }
 
     private int calcRows() {
@@ -30,7 +37,7 @@ public class ExpressionHandler {
         return numberOfVariables + 1;
     }
 
-    public int getNumberOfVariables() {
+    private Map<Character, Integer> getFreqMap(){
         Map<Character, Integer> freq = new HashMap<>();
         for(Character c : expression.toCharArray()){
             if(Character.isAlphabetic(c) && !c.equals('v') && !c.equals('V')){
@@ -42,6 +49,11 @@ public class ExpressionHandler {
                 }
             }
         }
+        return freq;
+    }
+
+    public int initNumberOfVariables() {
+        Map<Character, Integer> freq = getFreqMap();
         return freq.size();
     }
 
@@ -57,6 +69,14 @@ public class ExpressionHandler {
         if(truthTable != null)
             return truthTable;
         return truthTableGenerator.generateTruthTable(this.expression);
+    }
+
+    public Character[] getSymbols(){
+        return symbols;
+    }
+
+    public int getNumberOfVariables() {
+        return numberOfVariables;
     }
 
     public void testTautology(){

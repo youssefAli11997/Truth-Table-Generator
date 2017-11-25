@@ -9,14 +9,26 @@ public class Main {
 
         System.out.println(expressionHandler.getNumberOfVariables());
 
-        /*Boolean[][] truthTable = expressionHandler.getTruthTable();
+        Boolean[][] truthTable = expressionHandler.getTruthTable();
+
+        Character[] symbols = expressionHandler.getSymbols();
+
+        for(Character symbol : symbols){
+            System.out.print(symbol + "  ");
+        }
+        System.out.println("#");
 
         for(Boolean[] row : truthTable){
             for(Boolean cell : row){
-                System.out.print(cell + " ");
+                if(cell.equals(false)){
+                    System.out.print("F |");
+                }
+                else{
+                    System.out.print("T |");
+                }
             }
             System.out.println();
-        }*/
+        }
 
     }
 }
