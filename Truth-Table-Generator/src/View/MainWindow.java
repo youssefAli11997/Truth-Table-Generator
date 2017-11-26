@@ -1,6 +1,18 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package View;
 
 import Controller.MainController;
+
+import java.awt.ComponentOrientation;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 /**
  *
@@ -47,6 +59,7 @@ public class MainWindow extends javax.swing.JFrame {
         getTTBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        saveTTBtn = new javax.swing.JButton();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -123,11 +136,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         expressionNumber.setFont(new java.awt.Font("Ubuntu", 0, 23)); // NOI18N
-        expressionNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                expressionNumberActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 0, 23)); // NOI18N
         jLabel3.setText("Expression number:");
@@ -210,6 +218,14 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
+        saveTTBtn.setFont(new java.awt.Font("Ubuntu", 0, 23)); // NOI18N
+        saveTTBtn.setText("Save As Text File");
+        saveTTBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveTTBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -222,8 +238,10 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addGap(4, 4, 4)
                         .addComponent(expressionNumberTT, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(340, 340, 340)
-                        .addComponent(getTTBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(getTTBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                        .addGap(11, 11, 11)
+                        .addComponent(saveTTBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -233,7 +251,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(expressionNumberTT, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(getTTBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(getTTBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveTTBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -266,7 +285,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         eqivExpr2.setFont(new java.awt.Font("Ubuntu", 0, 23)); // NOI18N
 
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -291,13 +309,14 @@ public class MainWindow extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(eqivExpr1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(getEquivBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(eqivExpr2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14)))
+                        .addComponent(jLabel14))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(eqivExpr1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13)
+                        .addComponent(getEquivBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                 .addContainerGap())
@@ -466,7 +485,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLayeredPane3.setLayout(jLayeredPane3Layout);
         jLayeredPane3Layout.setHorizontalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2)
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,10 +566,6 @@ public class MainWindow extends javax.swing.JFrame {
         jTable1.setVisible(true);
     }//GEN-LAST:event_getTTBtnActionPerformed
 
-    private void expressionNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expressionNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_expressionNumberActionPerformed
-
     private void addExpressionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpressionBtnActionPerformed
         if(expressionNumber.getText().equals(""))
             return;
@@ -567,6 +582,36 @@ public class MainWindow extends javax.swing.JFrame {
         String text = controller.getExpressionAt(Integer.parseInt(expressionNumberShow.getText())).getExpression();
         showExpressionText.setText(text);
     }//GEN-LAST:event_showSetBntActionPerformed
+
+    private void saveTTBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTTBtnActionPerformed
+        if(expressionNumberTT.getText().equals(""))
+            return;
+        JFileChooser saveFileChooser = new JFileChooser();
+        saveFileChooser.setSelectedFile(new File("truthTable"));
+        saveFileChooser.setAcceptAllFileFilterUsed(false);
+        saveFileChooser.addChoosableFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                if(f.isDirectory())
+                    return true;
+                if(f.getName().endsWith(".txt"))
+                    return true;
+                return false;
+            }
+
+            @Override
+            public String getDescription() {
+                return ".txt";
+            }
+        });
+        int ret = saveFileChooser.showSaveDialog(jPanel1);
+        if(ret == JFileChooser.APPROVE_OPTION){
+            File file = new File(saveFileChooser.getCurrentDirectory().getPath() + File.separator
+                               + saveFileChooser.getSelectedFile().getName()
+                               + saveFileChooser.getFileFilter().getDescription());
+            controller.saveTruthTable(file, Integer.parseInt(expressionNumberTT.getText()));
+        }
+    }//GEN-LAST:event_saveTTBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -646,6 +691,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton saveTTBtn;
     private javax.swing.JTextArea showContra;
     private javax.swing.JTextArea showExpressionText;
     private javax.swing.JButton showSetBnt;

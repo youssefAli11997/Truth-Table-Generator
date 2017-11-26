@@ -315,7 +315,6 @@ public class MyExpressionEvaluator implements ExpressionEvaluator {
 								if(x == 0){
 									num2 = false;
 								}
-								System.out.println(num1 + " " + x + " " + num2 + " " + y);
 								int result = 1;
 								if(chars.equals("^"))
 								{
@@ -328,7 +327,6 @@ public class MyExpressionEvaluator implements ExpressionEvaluator {
 								else if(chars.equals(">"))
 								{
 									booleanResult = !(num1) | num2;
-									System.out.println(!num1 + " " + num2 + " " + booleanResult);
 								}
 								else
 								{
