@@ -1,5 +1,6 @@
+import View.MainWindow;
+
 import javax.swing.*;
-import java.util.Scanner;
 
 public class Main {
 

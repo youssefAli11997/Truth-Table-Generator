@@ -1,8 +1,11 @@
-import java.util.Stack;
+package Model;
+
+import Interfaces.ExpressionEvaluator;
 
 import javax.management.RuntimeErrorException;
+import java.util.Stack;
 
-public class MyExpressionEvaluator implements ExpressionEvaluator{
+public class MyExpressionEvaluator implements ExpressionEvaluator {
 
 	@Override
 	public Boolean getTruthValue(String expression) {

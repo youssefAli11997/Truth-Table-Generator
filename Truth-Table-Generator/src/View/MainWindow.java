@@ -1,7 +1,6 @@
+package View;
 
-import java.awt.ComponentOrientation;
-import java.util.ArrayList;
-import java.util.Collections;
+import Controller.MainController;
 
 /**
  *
@@ -9,14 +8,14 @@ import java.util.Collections;
  */
 public class MainWindow extends javax.swing.JFrame {
     
-    Controller controller;
+    MainController controller;
 
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
-        controller = new Controller();
+        controller = new MainController();
         jTable1.setVisible(false);
     }
 

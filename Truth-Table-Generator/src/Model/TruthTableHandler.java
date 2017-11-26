@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+package Model;
+
+import Interfaces.ExpressionEvaluator;
 
 public class TruthTableHandler {
 
