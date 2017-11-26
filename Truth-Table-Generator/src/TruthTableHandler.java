@@ -7,7 +7,7 @@ public class TruthTableHandler {
     private int cols;
     private int vars;
     private Character[] symbols;
-
+    private ExpressionEvaluator expressionEvaluator;
 
     public TruthTableHandler(int rows, int cols, Character[] symbols){
         this.rows = rows;
@@ -15,6 +15,7 @@ public class TruthTableHandler {
         this.vars = cols-1;
         this.symbols = symbols;
         this.truthTable = new Boolean[this.rows][this.cols];
+        this.expressionEvaluator = new MyExpressionEvaluator();
     }
 
     public Boolean[][] generateTruthTable(String expression){
@@ -25,7 +26,6 @@ public class TruthTableHandler {
             while(subsetBits.length() < vars){
                 subsetBits = "0" + subsetBits;
             }
-            //System.out.println(subsetBits);
             for(int i=0; i<subsetBits.length(); i++){
                 truthTable[subset][i] = (subsetBits.charAt(i) == '1');
             }
@@ -33,18 +33,14 @@ public class TruthTableHandler {
             for(Character symbol : symbols){
                 substitutedExpression = substitutedExpression.replaceAll(symbol + "", subsetBits.charAt(i++)+ "");
             }
-            System.out.println(substitutedExpression);
-            // Labib's Job (commented til being done).
-            // Boolean truthValue = SomeClass.getTruthValue(substitutedExpression);
-            // truthTable[subset][cols-1] = truthValue;
 
-            // For now
-            truthTable[subset][cols-1] = new Boolean(true);
+            Boolean truthValue = expressionEvaluator.getTruthValue(substitutedExpression);
+            truthTable[subset][cols-1] = truthValue;
         }
         return truthTable;
     }
 
-    public Boolean testEquivalance(Boolean[][] truthTable, Boolean[][] comparedTruthTable) {
+    public Boolean testEquivalence(Boolean[][] truthTable, Boolean[][] comparedTruthTable) {
         if(truthTable.length != comparedTruthTable.length)
             return false;
         for(int i=0; i<truthTable.length; i++){

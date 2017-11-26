@@ -245,8 +245,8 @@ public class MyExpressionEvaluator implements ExpressionEvaluator{
 			StringBuilder out = new StringBuilder();
 			for (int i = 0; i < s.length(); i++) {
 			   if (i > 0) {
-			      out.append(" ");
-			    }
+			   		out.append(" ");
+			   }
 
 			   out.append(s.charAt(i));
 			}
@@ -257,6 +257,7 @@ public class MyExpressionEvaluator implements ExpressionEvaluator{
 
 	@Override
 	public Boolean evaluate(String expression) {
+		System.out.println(expression);
 		if(expression == null || expression.isEmpty())
 		{
 			throw null;
@@ -293,7 +294,7 @@ public class MyExpressionEvaluator implements ExpressionEvaluator{
 					}
 					else
 					{
-						if(operands.size() == 1)
+						if(operands.size() == 1 && !chars.equals("~"))
 						{
 							throw null;
 						}
@@ -303,30 +304,32 @@ public class MyExpressionEvaluator implements ExpressionEvaluator{
 								boolean num1 = true;
 								boolean num2 = true;
 								boolean booleanResult;
-								int x =   Integer.parseInt(operands.pop().toString());
+								int x =  Integer.parseInt(operands.pop().toString());
 								int y =  Integer.parseInt(operands.pop().toString());
-								if(x == 0){
+								if(y == 0){
 									num1 = false;
 								}
-								if(y == 0){
+								if(x == 0){
 									num2 = false;
 								}
+								System.out.println(num1 + " " + x + " " + num2 + " " + y);
 								int result = 1;
 								if(chars.equals("^"))
 								{
-									booleanResult = num1 && num2;
+									booleanResult = num1 & num2;
 								}
 								else if(chars.equals("v"))
 								{
-									booleanResult = num1 || num2;
+									booleanResult = num1 | num2;
 								}
 								else if(chars.equals(">"))
 								{
-									booleanResult = !(num1) || num2;
+									booleanResult = !(num1) | num2;
+									System.out.println(!num1 + " " + num2 + " " + booleanResult);
 								}
 								else
 								{
-									booleanResult = (num1 && num2) || (!(num1) && !(num2));
+									booleanResult = (num1 & num2) | (!(num1) & !(num2));
 								}
 								if(booleanResult == false){
 									result = 0;
@@ -334,7 +337,7 @@ public class MyExpressionEvaluator implements ExpressionEvaluator{
 								operands.push(result);
 							}
 							else{
-								int x =   Integer.parseInt(operands.pop().toString());
+								int x = Integer.parseInt(operands.pop().toString());
 								if(x == 1){
 									x = 0;
 								}

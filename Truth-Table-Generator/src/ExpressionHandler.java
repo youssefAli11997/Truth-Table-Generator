@@ -119,6 +119,6 @@ public class ExpressionHandler {
     }
 
     public Boolean isEquivalence(Boolean[][] comparedTruthTable){
-        return truthTableHandler.testEquivalance(truthTable, comparedTruthTable);
+        return truthTableHandler.testEquivalence(truthTable, comparedTruthTable);
     }
 }
